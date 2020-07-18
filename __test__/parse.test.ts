@@ -42,6 +42,12 @@ const testXml = `<?xml version="1.0" encoding="UTF-8"?>
 </issues>
 `;
 
+const testEmptyXml = `<?xml version="1.0" encoding="UTF-8"?>
+<issues format="5" by="lint 4.0.0">
+
+</issues>
+`;
+
 test("parse", async () => {
     const result = await parse(testXml);
     expect(result.issues.length).toBe(2);
@@ -53,4 +59,9 @@ test("parse", async () => {
     expect(result.issues[1].category).toBe("Performance");
     expect(result.issues[1].id).toBe("MergeRootFrame");
     expect(result.issues[1].priority).toBe(4);
+});
+
+test("parseEmpty", async () => {
+    const result = await parse(testEmptyXml);
+    expect(result.issues.length).toBe(0);
 });
