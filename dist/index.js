@@ -18451,9 +18451,9 @@ function renderSeverity(report, fileName) {
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
-                    fatalCount = (_a = report.severity.get("fatal")) !== null && _a !== void 0 ? _a : 0;
-                    errorCount = (_b = report.severity.get("error")) !== null && _b !== void 0 ? _b : 0;
-                    warningCount = (_c = report.severity.get("warning")) !== null && _c !== void 0 ? _c : 0;
+                    fatalCount = (_a = report.severity.get("Fatal")) !== null && _a !== void 0 ? _a : 0;
+                    errorCount = (_b = report.severity.get("Error")) !== null && _b !== void 0 ? _b : 0;
+                    warningCount = (_c = report.severity.get("Warning")) !== null && _c !== void 0 ? _c : 0;
                     canvasRenderService = new CanvasRenderService(width, height);
                     configuration = {
                         type: "bar",
@@ -30276,7 +30276,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.writeReport = void 0;
 var fs = __importStar(__webpack_require__(747));
 function writeReport(config, report) {
-    fs.writeFileSync(config.reportJsonFilePath, JSON.stringify(report, undefined, 4));
+    var json = {
+        severity: Array.from(report.severity.entries()),
+        category: Array.from(report.category.entries()),
+        id: Array.from(report.id.entries()),
+        priority: Array.from(report.priority.entries()),
+    };
+    fs.writeFileSync(config.reportJsonFilePath, JSON.stringify(json, undefined, 4));
     var severity = toStringFromStringMap(report.severity);
     var category = toStringFromStringMap(report.category);
     var id = toStringFromStringMap(report.id);
@@ -33494,9 +33500,9 @@ function appendData(data, report) {
     var _a, _b, _c;
     var date = new Date();
     var dateString = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
-    var warning = (_a = report.severity.get("warning")) !== null && _a !== void 0 ? _a : 0;
-    var error = (_b = report.severity.get("error")) !== null && _b !== void 0 ? _b : 0;
-    var fatal = (_c = report.severity.get("fatal")) !== null && _c !== void 0 ? _c : 0;
+    var warning = (_a = report.severity.get("Warning")) !== null && _a !== void 0 ? _a : 0;
+    var error = (_b = report.severity.get("Error")) !== null && _b !== void 0 ? _b : 0;
+    var fatal = (_c = report.severity.get("Fatal")) !== null && _c !== void 0 ? _c : 0;
     var all = warning + error + fatal;
     data.push({ date: dateString, all: all, warning: warning, error: error, fatal: fatal });
 }
