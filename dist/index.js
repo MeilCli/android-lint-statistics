@@ -20245,7 +20245,11 @@ function hasDataBranch(config) {
                     return [4 /*yield*/, exec.exec("git branch -a", undefined, execOption)];
                 case 2:
                     _a.sent();
-                    return [2 /*return*/, 0 <= stdout.split(" ").indexOf("remotes/origin/" + config.dataBranch)];
+                    return [2 /*return*/, (0 <=
+                            stdout
+                                .split(" ")
+                                .map(function (x) { return x.trim(); })
+                                .indexOf("remotes/origin/" + config.dataBranch))];
             }
         });
     });

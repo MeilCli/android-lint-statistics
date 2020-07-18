@@ -61,5 +61,11 @@ async function hasDataBranch(config: Config): Promise<boolean> {
     await exec.exec("git fetch --all");
     await exec.exec("git branch -a", undefined, execOption);
 
-    return 0 <= stdout.split(" ").indexOf(`remotes/origin/${config.dataBranch}`);
+    return (
+        0 <=
+        stdout
+            .split(" ")
+            .map((x) => x.trim())
+            .indexOf(`remotes/origin/${config.dataBranch}`)
+    );
 }
