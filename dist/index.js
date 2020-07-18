@@ -20652,16 +20652,19 @@ function checkoutDataBranch(config) {
                     return [4 /*yield*/, hasDataBranch(config)];
                 case 1:
                     hasBranch = _a.sent();
-                    if (!hasBranch) return [3 /*break*/, 4];
+                    if (!hasBranch) return [3 /*break*/, 5];
                     return [4 /*yield*/, exec.exec("git checkout -b " + config.dataBranch)];
                 case 2:
                     _a.sent();
-                    return [4 /*yield*/, exec.exec("git pull origin " + config.dataBranch)];
+                    return [4 /*yield*/, exec.exec("git config pull.ff only")];
                 case 3:
                     _a.sent();
+                    return [4 /*yield*/, exec.exec("git pull origin " + config.dataBranch)];
+                case 4:
+                    _a.sent();
                     return [2 /*return*/, false];
-                case 4: return [4 /*yield*/, exec.exec("git checkout --orphan " + config.dataBranch)];
-                case 5:
+                case 5: return [4 /*yield*/, exec.exec("git checkout --orphan " + config.dataBranch)];
+                case 6:
                     _a.sent();
                     return [2 /*return*/, true];
             }
