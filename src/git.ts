@@ -33,6 +33,8 @@ export async function checkoutBranch(branch: string) {
 }
 
 export async function commit(config: Config) {
+    await exec.exec(`git config --local user.name ${config.dataCommitUser}`);
+    await exec.exec(`git config --local user.emaol ${config.dataCommitEmail}`);
     await exec.exec("git rm -rf .");
     await exec.exec(`git add ${config.dataJsonFilePath}`);
     await exec.exec("git commit --no-edit -m update");

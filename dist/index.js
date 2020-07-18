@@ -4023,14 +4023,20 @@ function commit(config) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, exec.exec("git rm -rf .")];
+                case 0: return [4 /*yield*/, exec.exec("git config --local user.name " + config.dataCommitUser)];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, exec.exec("git add " + config.dataJsonFilePath)];
+                    return [4 /*yield*/, exec.exec("git config --local user.emaol " + config.dataCommitEmail)];
                 case 2:
                     _a.sent();
-                    return [4 /*yield*/, exec.exec("git commit --no-edit -m update")];
+                    return [4 /*yield*/, exec.exec("git rm -rf .")];
                 case 3:
+                    _a.sent();
+                    return [4 /*yield*/, exec.exec("git add " + config.dataJsonFilePath)];
+                case 4:
+                    _a.sent();
+                    return [4 /*yield*/, exec.exec("git commit --no-edit -m update")];
+                case 5:
                     _a.sent();
                     return [2 /*return*/];
             }
@@ -4760,6 +4766,8 @@ function readConfig() {
         lintXmlFilePath: getInput("lint_xml_file_path"),
         lintXmlFilePathFollowSymbolicLinks: getInput("lint_xml_file_path_follow_symbolic_links") == "true",
         dataBranch: getInputOrNull("data_branch"),
+        dataCommitUser: getInputOrNull("data_commit_user"),
+        dataCommitEmail: getInputOrNull("data_commit_email"),
         dataJsonFilePath: getInputOrNull("data_json_file_path"),
         dataChartFilePath: getInputOrNull("data_chart_file_path"),
         severityChartFilePath: getInput("severity_chart_file_path"),

@@ -9,6 +9,8 @@ export interface Config {
     lintXmlFilePath: string;
     lintXmlFilePathFollowSymbolicLinks: boolean;
     dataBranch: string | null;
+    dataCommitUser: string | null;
+    dataCommitEmail: string | null;
     dataJsonFilePath: string | null;
     dataChartFilePath: string | null;
     severityChartFilePath: string;
@@ -24,6 +26,8 @@ export function readConfig(): Config {
         lintXmlFilePath: getInput("lint_xml_file_path"),
         lintXmlFilePathFollowSymbolicLinks: getInput("lint_xml_file_path_follow_symbolic_links") == "true",
         dataBranch: getInputOrNull("data_branch"),
+        dataCommitUser: getInputOrNull("data_commit_user"),
+        dataCommitEmail: getInputOrNull("data_commit_email"),
         dataJsonFilePath: getInputOrNull("data_json_file_path"),
         dataChartFilePath: getInputOrNull("data_chart_file_path"),
         severityChartFilePath: getInput("severity_chart_file_path"),
