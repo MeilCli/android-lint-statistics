@@ -25,7 +25,7 @@ export async function checkoutDataBranch(config: Config): Promise<boolean> {
 
     const hasBranch = await hasDataBranch(config);
     if (hasBranch) {
-        await exec.exec(`git checkout -b origin/${config.dataBranch}`);
+        await exec.exec(`git checkout -b ${config.dataBranch}`);
         return false;
     } else {
         await exec.exec(`git checkout --orphan ${config.dataBranch}`);
@@ -49,7 +49,7 @@ export async function commit(config: Config, isInitialBranch: boolean) {
 
 export async function pushDataBranch(config: Config) {
     const remote = `https://x-access-token:${config.githubToken}@github.com/${config.repository}.git`;
-    await exec.exec(`git push ${remote} HEAD:origin/${config.dataBranch}`);
+    await exec.exec(`git push ${remote} HEAD:${config.dataBranch}`);
 }
 
 async function hasDataBranch(config: Config): Promise<boolean> {
