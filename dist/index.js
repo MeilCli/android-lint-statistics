@@ -20239,13 +20239,13 @@ function hasDataBranch(config) {
                             stdout += data.toString();
                         },
                     };
-                    return [4 /*yield*/, exec.exec("git fetch -p")];
+                    return [4 /*yield*/, exec.exec("git fetch -all")];
                 case 1:
                     _a.sent();
                     return [4 /*yield*/, exec.exec("git branch -a", undefined, execOption)];
                 case 2:
                     _a.sent();
-                    return [2 /*return*/, 0 <= stdout.split(" ").indexOf("origin/" + config.dataBranch)];
+                    return [2 /*return*/, 0 <= stdout.split(" ").indexOf("remotes/origin/" + config.dataBranch)];
             }
         });
     });
