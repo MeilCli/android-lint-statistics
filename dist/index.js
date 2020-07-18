@@ -20155,7 +20155,7 @@ function checkoutDataBranch(config) {
                 case 1:
                     hasBranch = _a.sent();
                     if (!hasBranch) return [3 /*break*/, 3];
-                    return [4 /*yield*/, exec.exec("git checkout -b " + config.dataBranch)];
+                    return [4 /*yield*/, exec.exec("git checkout -b origin/" + config.dataBranch)];
                 case 2:
                     _a.sent();
                     return [3 /*break*/, 5];
@@ -20242,10 +20242,10 @@ function hasDataBranch(config) {
                     return [4 /*yield*/, exec.exec("git fetch -p")];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, exec.exec("git branch", undefined, execOption)];
+                    return [4 /*yield*/, exec.exec("git branch -a", undefined, execOption)];
                 case 2:
                     _a.sent();
-                    return [2 /*return*/, 0 <= stdout.split(" ").indexOf(config.dataBranch)];
+                    return [2 /*return*/, 0 <= stdout.split(" ").indexOf("origin/" + config.dataBranch)];
             }
         });
     });

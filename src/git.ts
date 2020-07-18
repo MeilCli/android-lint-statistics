@@ -22,7 +22,7 @@ export async function checkoutDataBranch(config: Config) {
 
     const hasBranch = await hasDataBranch(config);
     if (hasBranch) {
-        await exec.exec(`git checkout -b ${config.dataBranch}`);
+        await exec.exec(`git checkout -b origin/${config.dataBranch}`);
     } else {
         await exec.exec(`git checkout --orphan ${config.dataBranch}`);
     }
@@ -59,7 +59,7 @@ async function hasDataBranch(config: Config): Promise<boolean> {
     };
 
     await exec.exec("git fetch -p");
-    await exec.exec("git branch", undefined, execOption);
+    await exec.exec("git branch -a", undefined, execOption);
 
-    return 0 <= stdout.split(" ").indexOf(config.dataBranch);
+    return 0 <= stdout.split(" ").indexOf(`origin/${config.dataBranch}`);
 }
