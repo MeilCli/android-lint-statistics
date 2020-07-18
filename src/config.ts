@@ -1,0 +1,46 @@
+import * as core from "@actions/core";
+
+export interface Config {
+    /**
+     * owner and repository
+     */
+    repository: string;
+    githubToken: string;
+    lintXmlFilePath: string;
+    lintXmlFilePathFollowSymbolicLinks: boolean;
+    dataBranch: string | null;
+    dataJsonFilePath: string | null;
+    dataChartFilePath: string | null;
+    severityChartFilePath: string;
+    priorityChartFilePath: string;
+    reportJsonFilePath: string;
+    reportTextFilePath: string;
+}
+
+export function readConfig(): Config {
+    return {
+        repository: getInput("repository"),
+        githubToken: getInput("github_token"),
+        lintXmlFilePath: getInput("lint_xml_file_path"),
+        lintXmlFilePathFollowSymbolicLinks: getInput("lint_xml_file_path_follow_symbolic_links") == "true",
+        dataBranch: getInputOrNull("data_branch"),
+        dataJsonFilePath: getInputOrNull("data_json_file_path"),
+        dataChartFilePath: getInputOrNull("data_chart_file_path"),
+        severityChartFilePath: getInput("severity_chart_file_path"),
+        priorityChartFilePath: getInput("priority_chart_file_path"),
+        reportJsonFilePath: getInput("report_json_file_path"),
+        reportTextFilePath: getInput("report_text_file_path"),
+    };
+}
+
+function getInputOrNull(key: string): string | null {
+    const result = core.getInput(key, { required: false });
+    if (result.length == 0) {
+        return null;
+    }
+    return result;
+}
+
+function getInput(key: string): string {
+    return core.getInput(key, { required: true });
+}
