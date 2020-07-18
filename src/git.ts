@@ -25,7 +25,7 @@ export async function checkoutDataBranch(config: Config): Promise<boolean> {
 
     const hasBranch = await hasDataBranch(config);
     if (hasBranch) {
-        await exec.exec(`git checkout -b ${config.dataBranch}`);
+        await exec.exec(`git checkout ${config.dataBranch}`);
         await exec.exec("git config pull.ff only");
         await exec.exec(`git pull origin ${config.dataBranch}`);
         return false;
