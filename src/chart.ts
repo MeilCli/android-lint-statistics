@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import { Report } from "./report";
-import { CanvasRenderService } from "chartjs-node-canvas";
-import { ChartConfiguration } from "chart.js";
+import { CanvasRenderService, ChartJsFactory } from "chartjs-node-canvas";
+import { Chart, ChartConfiguration } from "chart.js";
 import { Data } from "./data";
 
 const width = 400;
@@ -12,7 +12,8 @@ export async function renderSeverity(report: Report, fileName: string) {
     const errorCount = report.severity.get("error") ?? 0;
     const warningCount = report.severity.get("warning") ?? 0;
 
-    const canvasRenderService = new CanvasRenderService(width, height, () => {});
+    const chartJsFactory: ChartJsFactory = () => Chart;
+    const canvasRenderService = new CanvasRenderService(width, height, () => {}, undefined, chartJsFactory);
     const configuration: ChartConfiguration = {
         type: "bar",
         data: {
@@ -54,7 +55,8 @@ export async function renderPriority(report: Report, fileName: string) {
     const keys = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     const values = keys.map((x) => report.priority.get(x) ?? 0);
 
-    const canvasRenderService = new CanvasRenderService(width, height, () => {});
+    const chartJsFactory: ChartJsFactory = () => Chart;
+    const canvasRenderService = new CanvasRenderService(width, height, () => {}, undefined, chartJsFactory);
     const configuration: ChartConfiguration = {
         type: "bar",
         data: {
@@ -96,7 +98,8 @@ export async function renderData(data: Data[], fileName: string) {
     const takeData = data.slice(0 <= data.length - 10 ? data.length - 10 : 0, data.length);
     const labels = data.map((x) => x.date);
 
-    const canvasRenderService = new CanvasRenderService(width, height, () => {});
+    const chartJsFactory: ChartJsFactory = () => Chart;
+    const canvasRenderService = new CanvasRenderService(width, height, () => {}, undefined, chartJsFactory);
     const configuration: ChartConfiguration = {
         type: "line",
         data: {
