@@ -13,6 +13,7 @@ import { Issues } from "./issues";
 async function run() {
     let config: Config;
     let mainBranch: string;
+    let isInitialBranch: boolean;
     const issuesList: Issues[] = [];
     try {
         config = readConfig();
@@ -24,7 +25,7 @@ async function run() {
             const issues = await parse(fs.readFileSync(file).toString());
             issuesList.push(issues);
         }
-        await git.checkoutDataBranch(config);
+        isInitialBranch = await git.checkoutDataBranch(config);
     } catch (error) {
         core.setFailed(error.message);
         return;
@@ -34,7 +35,7 @@ async function run() {
         const data = readData(config);
         appendData(data, report);
         writeData(config, data);
-        await git.commit(config);
+        await git.commit(config, isInitialBranch);
         await git.pushDataBranch(config);
 
         writeReport(config, report);

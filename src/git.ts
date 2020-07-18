@@ -15,16 +15,21 @@ export async function echoCurrentBranch(): Promise<string> {
     return stdout;
 }
 
-export async function checkoutDataBranch(config: Config) {
+/**
+ * return is initial branch
+ */
+export async function checkoutDataBranch(config: Config): Promise<boolean> {
     if (config.dataBranch == null) {
-        return;
+        return false;
     }
 
     const hasBranch = await hasDataBranch(config);
     if (hasBranch) {
         await exec.exec(`git checkout -b origin/${config.dataBranch}`);
+        return false;
     } else {
         await exec.exec(`git checkout --orphan ${config.dataBranch}`);
+        return true;
     }
 }
 
@@ -32,11 +37,13 @@ export async function checkoutBranch(branch: string) {
     await exec.exec(`git checkout ${branch}`);
 }
 
-export async function commit(config: Config) {
+export async function commit(config: Config, isInitialBranch: boolean) {
     await exec.exec(`git config --local user.name ${config.dataCommitUser}`);
     await exec.exec(`git config --local user.email ${config.dataCommitEmail}`);
-    await exec.exec("git rm -rf .");
-    await exec.exec(`git add ${config.dataJsonFilePath}`);
+    if (isInitialBranch) {
+        await exec.exec("git rm -rf .");
+        await exec.exec(`git add ${config.dataJsonFilePath}`);
+    }
     await exec.exec("git commit --no-edit -m update");
 }
 

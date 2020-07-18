@@ -18580,7 +18580,7 @@ var chart_1 = __webpack_require__(148);
 function run() {
     var e_1, _a;
     return __awaiter(this, void 0, void 0, function () {
-        var config, mainBranch, issuesList, globber, _b, _c, file, issues, e_1_1, error_1, report, data, error_2;
+        var config, mainBranch, isInitialBranch, issuesList, globber, _b, _c, file, issues, e_1_1, error_1, report, data, error_2;
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
@@ -18631,7 +18631,7 @@ function run() {
                 case 15: return [7 /*endfinally*/];
                 case 16: return [4 /*yield*/, git.checkoutDataBranch(config)];
                 case 17:
-                    _d.sent();
+                    isInitialBranch = _d.sent();
                     return [3 /*break*/, 19];
                 case 18:
                     error_1 = _d.sent();
@@ -18643,7 +18643,7 @@ function run() {
                     data = data_1.readData(config);
                     data_1.appendData(data, report);
                     data_1.writeData(config, data);
-                    return [4 /*yield*/, git.commit(config)];
+                    return [4 /*yield*/, git.commit(config, isInitialBranch)];
                 case 20:
                     _d.sent();
                     return [4 /*yield*/, git.pushDataBranch(config)];
@@ -20142,6 +20142,9 @@ function echoCurrentBranch() {
     });
 }
 exports.echoCurrentBranch = echoCurrentBranch;
+/**
+ * return is initial branch
+ */
 function checkoutDataBranch(config) {
     return __awaiter(this, void 0, void 0, function () {
         var hasBranch;
@@ -20149,7 +20152,7 @@ function checkoutDataBranch(config) {
             switch (_a.label) {
                 case 0:
                     if (config.dataBranch == null) {
-                        return [2 /*return*/];
+                        return [2 /*return*/, false];
                     }
                     return [4 /*yield*/, hasDataBranch(config)];
                 case 1:
@@ -20158,12 +20161,11 @@ function checkoutDataBranch(config) {
                     return [4 /*yield*/, exec.exec("git checkout -b origin/" + config.dataBranch)];
                 case 2:
                     _a.sent();
-                    return [3 /*break*/, 5];
+                    return [2 /*return*/, false];
                 case 3: return [4 /*yield*/, exec.exec("git checkout --orphan " + config.dataBranch)];
                 case 4:
                     _a.sent();
-                    _a.label = 5;
-                case 5: return [2 /*return*/];
+                    return [2 /*return*/, true];
             }
         });
     });
@@ -20182,7 +20184,7 @@ function checkoutBranch(branch) {
     });
 }
 exports.checkoutBranch = checkoutBranch;
-function commit(config) {
+function commit(config, isInitialBranch) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -20192,14 +20194,16 @@ function commit(config) {
                     return [4 /*yield*/, exec.exec("git config --local user.email " + config.dataCommitEmail)];
                 case 2:
                     _a.sent();
+                    if (!isInitialBranch) return [3 /*break*/, 5];
                     return [4 /*yield*/, exec.exec("git rm -rf .")];
                 case 3:
                     _a.sent();
                     return [4 /*yield*/, exec.exec("git add " + config.dataJsonFilePath)];
                 case 4:
                     _a.sent();
-                    return [4 /*yield*/, exec.exec("git commit --no-edit -m update")];
-                case 5:
+                    _a.label = 5;
+                case 5: return [4 /*yield*/, exec.exec("git commit --no-edit -m update")];
+                case 6:
                     _a.sent();
                     return [2 /*return*/];
             }
