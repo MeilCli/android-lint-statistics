@@ -2285,15 +2285,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parse = void 0;
 var xml = __importStar(__webpack_require__(992));
+var core = __importStar(__webpack_require__(470));
 function parse(value) {
     return __awaiter(this, void 0, void 0, function () {
         var root, issues, _i, _a, element;
         return __generator(this, function (_b) {
             switch (_b.label) {
-                case 0: return [4 /*yield*/, xml.parseStringPromise(value)];
+                case 0:
+                    core.info("before parse");
+                    return [4 /*yield*/, xml.parseStringPromise(value)];
                 case 1:
                     root = (_b.sent());
+                    console.info(root);
+                    core.info("after parse");
                     issues = [];
+                    core.info("before for");
                     for (_i = 0, _a = root.issues.issue; _i < _a.length; _i++) {
                         element = _a[_i];
                         issues.push({
@@ -2303,6 +2309,7 @@ function parse(value) {
                             priority: parseInt(element.$.priority),
                         });
                     }
+                    core.info("after for");
                     return [2 /*return*/, { issues: issues }];
             }
         });
