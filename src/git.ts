@@ -42,8 +42,8 @@ export async function commit(config: Config, isInitialBranch: boolean) {
     await exec.exec(`git config --local user.email ${config.dataCommitEmail}`);
     if (isInitialBranch) {
         await exec.exec("git rm -rf .");
-        await exec.exec(`git add ${config.dataJsonFilePath}`);
     }
+    await exec.exec(`git add ${config.dataJsonFilePath}`);
     await exec.exec("git commit --no-edit -m update");
 }
 

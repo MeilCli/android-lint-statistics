@@ -20194,15 +20194,15 @@ function commit(config, isInitialBranch) {
                     return [4 /*yield*/, exec.exec("git config --local user.email " + config.dataCommitEmail)];
                 case 2:
                     _a.sent();
-                    if (!isInitialBranch) return [3 /*break*/, 5];
+                    if (!isInitialBranch) return [3 /*break*/, 4];
                     return [4 /*yield*/, exec.exec("git rm -rf .")];
                 case 3:
                     _a.sent();
-                    return [4 /*yield*/, exec.exec("git add " + config.dataJsonFilePath)];
-                case 4:
+                    _a.label = 4;
+                case 4: return [4 /*yield*/, exec.exec("git add " + config.dataJsonFilePath)];
+                case 5:
                     _a.sent();
-                    _a.label = 5;
-                case 5: return [4 /*yield*/, exec.exec("git commit --no-edit -m update")];
+                    return [4 /*yield*/, exec.exec("git commit --no-edit -m update")];
                 case 6:
                     _a.sent();
                     return [2 /*return*/];
