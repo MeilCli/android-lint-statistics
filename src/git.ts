@@ -49,7 +49,7 @@ export async function commit(config: Config, isInitialBranch: boolean) {
 
 export async function pushDataBranch(config: Config) {
     const remote = `https://x-access-token:${config.githubToken}@github.com/${config.repository}.git`;
-    await exec.exec(`git push ${remote} HEAD:${config.dataBranch}`);
+    await exec.exec(`git push ${remote} HEAD:${config.dataBranch} -f`);
 }
 
 async function hasDataBranch(config: Config): Promise<boolean> {
