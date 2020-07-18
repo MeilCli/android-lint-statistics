@@ -9,7 +9,13 @@ export interface Report {
 }
 
 export function writeReport(config: Config, report: Report) {
-    fs.writeFileSync(config.reportJsonFilePath, JSON.stringify(report, undefined, 4));
+    const json = {
+        severity: Array.from(report.severity.entries()),
+        category: Array.from(report.category.entries()),
+        id: Array.from(report.id.entries()),
+        priority: Array.from(report.priority.entries()),
+    };
+    fs.writeFileSync(config.reportJsonFilePath, JSON.stringify(json, undefined, 4));
 
     const severity = toStringFromStringMap(report.severity);
     const category = toStringFromStringMap(report.category);

@@ -37,9 +37,9 @@ export function writeData(config: Config, data: Data[]) {
 export function appendData(data: Data[], report: Report) {
     const date = new Date();
     const dateString = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-    const warning = report.severity.get("warning") ?? 0;
-    const error = report.severity.get("error") ?? 0;
-    const fatal = report.severity.get("fatal") ?? 0;
+    const warning = report.severity.get("Warning") ?? 0;
+    const error = report.severity.get("Error") ?? 0;
+    const fatal = report.severity.get("Fatal") ?? 0;
     const all = warning + error + fatal;
     data.push({ date: dateString, all: all, warning: warning, error: error, fatal: fatal });
 }

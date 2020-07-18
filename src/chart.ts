@@ -43,9 +43,9 @@ class CanvasRenderService {
 }
 
 export async function renderSeverity(report: Report, fileName: string) {
-    const fatalCount = report.severity.get("fatal") ?? 0;
-    const errorCount = report.severity.get("error") ?? 0;
-    const warningCount = report.severity.get("warning") ?? 0;
+    const fatalCount = report.severity.get("Fatal") ?? 0;
+    const errorCount = report.severity.get("Error") ?? 0;
+    const warningCount = report.severity.get("Warning") ?? 0;
 
     const canvasRenderService = new CanvasRenderService(width, height);
     const configuration: ChartConfiguration = {
