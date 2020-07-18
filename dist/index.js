@@ -20653,7 +20653,7 @@ function checkoutDataBranch(config) {
                 case 1:
                     hasBranch = _a.sent();
                     if (!hasBranch) return [3 /*break*/, 5];
-                    return [4 /*yield*/, exec.exec("git checkout -b " + config.dataBranch)];
+                    return [4 /*yield*/, exec.exec("git checkout " + config.dataBranch)];
                 case 2:
                     _a.sent();
                     return [4 /*yield*/, exec.exec("git config pull.ff only")];
