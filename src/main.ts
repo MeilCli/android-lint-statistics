@@ -5,8 +5,8 @@ import * as git from "./git";
 import { Config, readConfig } from "./config";
 import { parse } from "./parse";
 import { calculate } from "./calculate";
-import { readData, writeData, appendData } from "./data";
-import { writeReport } from "./report";
+import { Data, readData, writeData, appendData } from "./data";
+import { Report, writeReport } from "./report";
 import { renderSeverity, renderPriority, renderData } from "./chart";
 import { Issues } from "./issues";
 
@@ -30,14 +30,22 @@ async function run() {
         core.setFailed(error.message);
         return;
     }
+    let report: Report;
+    let data: Data[];
     try {
-        const report = calculate(issuesList);
-        const data = readData(config);
+        report = calculate(issuesList);
+        data = readData(config);
         appendData(data, report);
         writeData(config, data);
         await git.commit(config, isInitialBranch);
         await git.pushDataBranch(config);
-
+    } catch (error) {
+        core.setFailed(error.message);
+        return;
+    } finally {
+        await git.checkoutBranch(mainBranch);
+    }
+    try {
         writeReport(config, report);
         await renderSeverity(report, config.severityChartFilePath);
         await renderPriority(report, config.priorityChartFilePath);
@@ -46,8 +54,6 @@ async function run() {
         }
     } catch (error) {
         core.setFailed(error.message);
-    } finally {
-        await git.checkoutBranch(mainBranch);
     }
 }
 
