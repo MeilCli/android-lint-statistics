@@ -20239,8 +20239,11 @@ function hasDataBranch(config) {
                             stdout += data.toString();
                         },
                     };
-                    return [4 /*yield*/, exec.exec("git branch", undefined, execOption)];
+                    return [4 /*yield*/, exec.exec("git fetch -p")];
                 case 1:
+                    _a.sent();
+                    return [4 /*yield*/, exec.exec("git branch", undefined, execOption)];
+                case 2:
                     _a.sent();
                     return [2 /*return*/, 0 <= stdout.split(" ").indexOf(config.dataBranch)];
             }

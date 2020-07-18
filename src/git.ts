@@ -58,6 +58,7 @@ async function hasDataBranch(config: Config): Promise<boolean> {
         },
     };
 
+    await exec.exec("git fetch -p");
     await exec.exec("git branch", undefined, execOption);
 
     return 0 <= stdout.split(" ").indexOf(config.dataBranch);
