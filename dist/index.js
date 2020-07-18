@@ -20239,7 +20239,7 @@ function hasDataBranch(config) {
                             stdout += data.toString();
                         },
                     };
-                    return [4 /*yield*/, exec.exec("git fetch -all")];
+                    return [4 /*yield*/, exec.exec("git fetch --all")];
                 case 1:
                     _a.sent();
                     return [4 /*yield*/, exec.exec("git branch -a", undefined, execOption)];
