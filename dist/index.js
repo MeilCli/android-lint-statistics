@@ -18917,7 +18917,7 @@ var chart_1 = __webpack_require__(148);
 function run() {
     var e_1, _a;
     return __awaiter(this, void 0, void 0, function () {
-        var config, mainBranch, isInitialBranch, issuesList, globber, _b, _c, file, issues, e_1_1, error_1, report, data, error_2;
+        var config, mainBranch, isInitialBranch, issuesList, globber, _b, _c, file, issues, e_1_1, error_1, report, data, error_2, error_3;
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
@@ -18975,7 +18975,7 @@ function run() {
                     core.setFailed(error_1.message);
                     return [2 /*return*/];
                 case 19:
-                    _d.trys.push([19, 26, 27, 29]);
+                    _d.trys.push([19, 22, 23, 25]);
                     report = calculate_1.calculate(issuesList);
                     data = data_1.readData(config);
                     data_1.appendData(data, report);
@@ -18986,28 +18986,35 @@ function run() {
                     return [4 /*yield*/, git.pushDataBranch(config)];
                 case 21:
                     _d.sent();
-                    report_1.writeReport(config, report);
-                    return [4 /*yield*/, chart_1.renderSeverity(report, config.severityChartFilePath)];
+                    return [3 /*break*/, 25];
                 case 22:
-                    _d.sent();
-                    return [4 /*yield*/, chart_1.renderPriority(report, config.priorityChartFilePath)];
-                case 23:
-                    _d.sent();
-                    if (!(config.dataChartFilePath != null)) return [3 /*break*/, 25];
-                    return [4 /*yield*/, chart_1.renderData(data, config.dataChartFilePath)];
-                case 24:
-                    _d.sent();
-                    _d.label = 25;
-                case 25: return [3 /*break*/, 29];
-                case 26:
                     error_2 = _d.sent();
                     core.setFailed(error_2.message);
-                    return [3 /*break*/, 29];
-                case 27: return [4 /*yield*/, git.checkoutBranch(mainBranch)];
-                case 28:
+                    return [2 /*return*/];
+                case 23: return [4 /*yield*/, git.checkoutBranch(mainBranch)];
+                case 24:
                     _d.sent();
                     return [7 /*endfinally*/];
-                case 29: return [2 /*return*/];
+                case 25:
+                    _d.trys.push([25, 30, , 31]);
+                    report_1.writeReport(config, report);
+                    return [4 /*yield*/, chart_1.renderSeverity(report, config.severityChartFilePath)];
+                case 26:
+                    _d.sent();
+                    return [4 /*yield*/, chart_1.renderPriority(report, config.priorityChartFilePath)];
+                case 27:
+                    _d.sent();
+                    if (!(config.dataChartFilePath != null)) return [3 /*break*/, 29];
+                    return [4 /*yield*/, chart_1.renderData(data, config.dataChartFilePath)];
+                case 28:
+                    _d.sent();
+                    _d.label = 29;
+                case 29: return [3 /*break*/, 31];
+                case 30:
+                    error_3 = _d.sent();
+                    core.setFailed(error_3.message);
+                    return [3 /*break*/, 31];
+                case 31: return [2 /*return*/];
             }
         });
     });
@@ -20645,13 +20652,16 @@ function checkoutDataBranch(config) {
                     return [4 /*yield*/, hasDataBranch(config)];
                 case 1:
                     hasBranch = _a.sent();
-                    if (!hasBranch) return [3 /*break*/, 3];
+                    if (!hasBranch) return [3 /*break*/, 4];
                     return [4 /*yield*/, exec.exec("git checkout -b " + config.dataBranch)];
                 case 2:
                     _a.sent();
+                    return [4 /*yield*/, exec.exec("git pull origin " + config.dataBranch)];
+                case 3:
+                    _a.sent();
                     return [2 /*return*/, false];
-                case 3: return [4 /*yield*/, exec.exec("git checkout --orphan " + config.dataBranch)];
-                case 4:
+                case 4: return [4 /*yield*/, exec.exec("git checkout --orphan " + config.dataBranch)];
+                case 5:
                     _a.sent();
                     return [2 /*return*/, true];
             }
