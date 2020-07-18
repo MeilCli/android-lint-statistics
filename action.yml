@@ -17,9 +17,9 @@ inputs:
     description: 'android lint reported xml file paths, enable glob pattern'
     required: true
   lint_xml_file_path_follow_symbolic_links:
-    description: 'android lint reported xml file paths glob pattern's follow symbolic links option'
+    description: 'android lint reported xml file paths glob pattern`s follow symbolic links option'
     required: true
-    default: false
+    default: 'false'
   data_branch:
     description: 'the saving data branch, this branch is created by this action. if want disable this feature, put empty string'
     default: 'data/lint'
