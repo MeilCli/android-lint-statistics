@@ -20706,7 +20706,7 @@ function pushDataBranch(config) {
             switch (_a.label) {
                 case 0:
                     remote = "https://x-access-token:" + config.githubToken + "@github.com/" + config.repository + ".git";
-                    return [4 /*yield*/, exec.exec("git push " + remote + " HEAD:" + config.dataBranch)];
+                    return [4 /*yield*/, exec.exec("git push " + remote + " HEAD:" + config.dataBranch + " -f")];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
