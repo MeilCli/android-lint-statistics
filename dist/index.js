@@ -20189,7 +20189,7 @@ function commit(config) {
                 case 0: return [4 /*yield*/, exec.exec("git config --local user.name " + config.dataCommitUser)];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, exec.exec("git config --local user.emaol " + config.dataCommitEmail)];
+                    return [4 /*yield*/, exec.exec("git config --local user.email " + config.dataCommitEmail)];
                 case 2:
                     _a.sent();
                     return [4 /*yield*/, exec.exec("git rm -rf .")];
