@@ -1,10 +1,10 @@
 name: CI
 
 on:
-  workflow_dispatch:
   push:
     branches:
-      - master      
+      - master
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,4 +25,3 @@ jobs:
           assignees: "MeilCli"
           reviewers: "MeilCli"
           branch-suffix: "short-commit-hash"
-
