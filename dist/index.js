@@ -18556,9 +18556,9 @@ function renderData(data, fileName) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    take = 7;
+                    take = 10;
                     takeData = data.slice(0 <= data.length - take ? data.length - take : 0, data.length);
-                    labels = data.map(function (x) { return x.date; });
+                    labels = takeData.map(function (x) { return x.date; });
                     canvasRenderService = new CanvasRenderService(width, height);
                     configuration = {
                         type: "line",
