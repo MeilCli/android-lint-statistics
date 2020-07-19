@@ -113,6 +113,9 @@ You can also pin to a [specific release](https://github.com/MeilCli/android-lint
   - the report text file path, this file is created at your checkouted branch
   - default: `report.txt`
 
+## Attention!
+This action auto create *data branch* and auto commit and push, because to create data transition chart image. Plese see `data_branch` input option
+
 ## How execute windows or mac runner?
 This action can execute only linux runner because [@zeit/ncc](https://github.com/vercel/ncc) aggregate node-canvas's binary. So, if you execute other runner, you do fork this repository and do `npm run build && npm run pack` on your runner.
 
