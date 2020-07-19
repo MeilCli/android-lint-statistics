@@ -18552,11 +18552,12 @@ function renderPriority(report, fileName) {
 exports.renderPriority = renderPriority;
 function renderData(data, fileName) {
     return __awaiter(this, void 0, void 0, function () {
-        var takeData, labels, canvasRenderService, configuration, image;
+        var take, takeData, labels, canvasRenderService, configuration, image;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    takeData = data.slice(0 <= data.length - 10 ? data.length - 10 : 0, data.length);
+                    take = 7;
+                    takeData = data.slice(0 <= data.length - take ? data.length - take : 0, data.length);
                     labels = data.map(function (x) { return x.date; });
                     canvasRenderService = new CanvasRenderService(width, height);
                     configuration = {
