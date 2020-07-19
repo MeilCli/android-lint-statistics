@@ -1,9 +1,68 @@
 # android-lint-statistics
 ![CI](https://github.com/MeilCli/android-lint-statistics/workflows/CI/badge.svg)  
-generate android lint statistics action
+Generate android lint statistics action
+
+This action generate some chart image and report file:
+|data transition|severity|priority|
+|:--:|:--:|:--:|
+|![](/images/data.png)|![](/images/severity.png)|![](/images/priority.png)|
 
 ## Required
 - This action can execute only linux runner
+
+## Example
+Simple example your android project repository, using [MeilCli/slack-upload-file](https://github.com/MeilCli/slack-upload-file) to notify slack
+```yaml
+name: CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Grant permission
+        run: chmod +x gradlew
+      - name: Run lint
+        run: ./gradlew lintDebug
+      - uses: MeilCli/android-lint-statistics@v1
+        with:
+          lint_xml_file_path: 'reports/lint/**/**.xml' # change your lint result path
+      - uses: MeilCli/slack-upload-file@v1
+        with:
+          slack_token: ${{ secrets.SLACK_TOKEN }}
+          channels: ${{ secrets.SLACK_CHANNELS }}
+          file_path: 'report.txt'
+          file_name: 'report.txt'
+          file_type: 'text' 
+      - uses: MeilCli/slack-upload-file@v1
+        with:
+          slack_token: ${{ secrets.SLACK_TOKEN }}
+          channels: ${{ secrets.SLACK_CHANNELS }}
+          file_path: 'data.png'
+          file_name: 'data.png'
+          file_type: 'png'
+      - uses: MeilCli/slack-upload-file@v1
+        with:
+          slack_token: ${{ secrets.SLACK_TOKEN }}
+          channels: ${{ secrets.SLACK_CHANNELS }}
+          file_path: 'severity.png'
+          file_name: 'severity.png'
+          file_type: 'png'
+      - uses: MeilCli/slack-upload-file@v1
+        with:
+          slack_token: ${{ secrets.SLACK_TOKEN }}
+          channels: ${{ secrets.SLACK_CHANNELS }}
+          file_path: 'priority.png'
+          file_name: 'priority.png'
+          file_type: 'png' 
+```
+You can also pin to a [specific release](https://github.com/MeilCli/android-lint-statistics/releases) version in the format `@v1.x.x`
 
 ## Input
 - `repository`
@@ -56,6 +115,47 @@ generate android lint statistics action
 
 ## How execute windows or mac runner?
 This action can execute only linux runner because [@zeit/ncc](https://github.com/vercel/ncc) aggregate node-canvas's binary. So, if you execute other runner, you do fork this repository and do `npm run build && npm run pack` on your runner.
+
+## How to run in a different repository than the target repository
+In my case, double checkout repository on monitoring repository.
+
+- target repository: [Librarian](https://github.com/MeilCli/Librarian)
+- monitoring repository: [Librarian-monitoring](https://github.com/MeilCli/Librarian-monitoring)
+
+simple example:
+```yaml
+name: CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          repository: 'MeilCli/Librarian'
+          ref: 'master'
+          path: 'Librarian'
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Grant permission
+        run: chmod +x Librarian/gradlew
+      - name: Run lint
+        run: cd Librarian && ./gradlew lintDebug
+      - uses: MeilCli/android-lint-statistics@v1
+        with:
+          lint_xml_file_path: 'Librarian/reports/lint/**/**.xml'
+      # generate paths:
+      # - report.txt
+      # - report.json
+      # - data.png
+      # - severity.png
+      # - priority.png
+```
 
 ## License
 MIT License
