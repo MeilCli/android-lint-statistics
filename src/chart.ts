@@ -128,7 +128,8 @@ export async function renderPriority(report: Report, fileName: string) {
 }
 
 export async function renderData(data: Data[], fileName: string) {
-    const takeData = data.slice(0 <= data.length - 10 ? data.length - 10 : 0, data.length);
+    const take = 7;
+    const takeData = data.slice(0 <= data.length - take ? data.length - take : 0, data.length);
     const labels = data.map((x) => x.date);
 
     const canvasRenderService = new CanvasRenderService(width, height);
