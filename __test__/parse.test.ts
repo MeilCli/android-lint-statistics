@@ -16,7 +16,7 @@ const testXml = `<?xml version="1.0" encoding="UTF-8"?>
         errorLine1="    &lt;application"
         errorLine2="     ~~~~~~~~~~~">
         <location
-            file="Librarian\sample\sample-ui-activity\src\main\AndroidManifest.xml"
+            file="Librarian\\sample\\sample-ui-activity\\src\\main\\AndroidManifest.xml"
             line="5"
             column="6"/>
     </issue>
@@ -34,7 +34,7 @@ const testXml = `<?xml version="1.0" encoding="UTF-8"?>
         errorLine1="&lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
         errorLine2="^">
         <location
-            file="Librarian\sample\sample-ui-activity\src\main\res\layout\activity_main.xml"
+            file="Librarian\\sample\\sample-ui-activity\\src\\main\\res\\layout\\activity_main.xml"
             line="2"
             column="1"/>
     </issue>
