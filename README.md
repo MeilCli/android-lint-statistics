@@ -160,6 +160,9 @@ jobs:
       # - priority.png
 ```
 
+## Contributing
+see [Contributing.md](./.github/CONTRIBUTING.md)
+
 ## License
 MIT License
 
