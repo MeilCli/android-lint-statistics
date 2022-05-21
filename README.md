@@ -1,5 +1,5 @@
 # android-lint-statistics
-![CI](https://github.com/MeilCli/android-lint-statistics/workflows/CI/badge.svg)  
+[![CI-Master](https://github.com/MeilCli/android-lint-statistics/actions/workflows/ci-master.yml/badge.svg)](https://github.com/MeilCli/android-lint-statistics/actions/workflows/ci-master.yml)  
 Generate android lint statistics action
 
 This action generate some chart image and report file:
