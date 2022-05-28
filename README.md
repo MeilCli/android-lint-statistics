@@ -167,11 +167,14 @@ jobs:
       # - priority.png
 ```
 
-## Contributing
+## Contributes
+[<img src="https://gist.github.com/MeilCli/868d7b5bc2eab95ec48bc9cb880275b0/raw/90474b1093bbc09131860bc385aae98d1ac1a8e4/metrics_contributors.svg">](https://github.com/MeilCli/android-lint-statistics/graphs/contributors)
+
+### Could you want to contribute?
 see [Contributing.md](./.github/CONTRIBUTING.md)
 
 ## License
-MIT License
+[<img src="https://gist.github.com/MeilCli/868d7b5bc2eab95ec48bc9cb880275b0/raw/90474b1093bbc09131860bc385aae98d1ac1a8e4/metrics_licenses.svg">](LICENSE.txt)
 
 ### Using
 - [actions/toolkit](https://github.com/actions/toolkit), published by [MIT License](https://github.com/actions/toolkit/blob/master/LICENSE.md)
