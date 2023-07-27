@@ -10561,7 +10561,7 @@ function wrappy (fn, cb) {
     var descriptor;
     descriptor = Object.create(null);
     descriptor.value = value;
-    descriptor.writeable = true;
+    descriptor.writable = true;
     descriptor.enumerable = true;
     descriptor.configurable = true;
     return Object.defineProperty(obj, key, descriptor);
@@ -16062,7 +16062,7 @@ return index;
 
 "use strict";
 /*!
- * Chart.js v4.3.1
+ * Chart.js v4.3.2
  * https://www.chartjs.org
  * (c) 2023 Chart.js Contributors
  * Released under the MIT License
@@ -21564,7 +21564,7 @@ function needContext(proxy, names) {
     return false;
 }
 
-var version = "4.3.1";
+var version = "4.3.2";
 
 const KNOWN_POSITIONS = [
     'top',
@@ -27562,7 +27562,7 @@ exports.scales = scales;
 
 "use strict";
 /*!
- * Chart.js v4.3.1
+ * Chart.js v4.3.2
  * https://www.chartjs.org
  * (c) 2023 Chart.js Contributors
  * Released under the MIT License
