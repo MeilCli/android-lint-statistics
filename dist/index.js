@@ -16062,7 +16062,7 @@ return index;
 
 "use strict";
 /*!
- * Chart.js v4.3.2
+ * Chart.js v4.3.3
  * https://www.chartjs.org
  * (c) 2023 Chart.js Contributors
  * Released under the MIT License
@@ -18149,7 +18149,7 @@ class LineController extends DatasetController {
         line._chart = this.chart;
         line._datasetIndex = this.index;
         line._decimated = !!_dataset._decimated;
-        line.points = points.slice(Math.max(this._drawStart - 1, 0), this._drawStart + this._drawCount);
+        line.points = points;
         const options = this.resolveDatasetElementOptions(mode);
         if (!this.options.showLine) {
             options.borderWidth = 0;
@@ -21564,7 +21564,7 @@ function needContext(proxy, names) {
     return false;
 }
 
-var version = "4.3.2";
+var version = "4.3.3";
 
 const KNOWN_POSITIONS = [
     'top',
@@ -27562,7 +27562,7 @@ exports.scales = scales;
 
 "use strict";
 /*!
- * Chart.js v4.3.2
+ * Chart.js v4.3.3
  * https://www.chartjs.org
  * (c) 2023 Chart.js Contributors
  * Released under the MIT License
